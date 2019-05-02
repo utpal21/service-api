@@ -18,7 +18,7 @@ public $successStatus = 200;
     public function login(){
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
             $user = Auth::user();
-            $success['token'] =  $user->createToken('MyApp')-> accessToken;
+            $success['token'] =  $user->createToken('trustService')-> accessToken;
             return response()->json(['success' => $success], $this-> successStatus);
         }
         else{
@@ -44,7 +44,7 @@ public $successStatus = 200;
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        $success['token'] =  $user->createToken('MyApp')-> accessToken;
+        $success['token'] =  $user->createToken('trustService')-> accessToken;
         $success['name'] =  $user->name;
         return response()->json(['success'=>$success], $this-> successStatus);
     }
